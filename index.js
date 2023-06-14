@@ -19,6 +19,7 @@ const dbo = require("./utils/newConnection");
 
 const userRouter = require("./routes/userRoutes");
 const carRouter = require("./routes/carRoutes");
+const cartsRouter = require("./routes/cartsRoutes");
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use('/images', express.static('images'));  //http://localhost:8081/images/61
 
 app.use("/users", userRouter);
 app.use("/cars", carRouter);
+app.use("/diagnostic", cartsRouter);
 
 app.get("/", function (req, res) {
 	res.send({ status: "success" });

@@ -62,7 +62,26 @@ routerCar.get("/car/:vin", verifyUser, (req, res, next) => {
 		.findOne({ vin: req.params.vin })
 		.then((result, err) => {
 			if (result) {
-				console.log(`Found a listing in the collection with the vin '${req.params.vin}'`);
+				console.log(`Found a list in the collection with the vin '${req.params.vin}'`);
+				console.log("result", result);
+				res.json(result);
+			} else {
+				console.log("error", err);
+			};
+		})
+
+});
+
+routerCar.get("/car/diagnostic/:group", verifyUser, (req, res, next) => {
+	console.log(`req catalogue ${req.params.group}`);
+	const dbConnect = dbo.getDb();
+
+	dbConnect
+		.collection('catalogue')
+		.findOne({ groupOfVehicles: req.params.group })
+		.then((result, err) => {
+			if (result) {
+				console.log(`Found a listing in the collection with the group '${req.params.group}'`);
 				console.log("result", result);
 				res.json(result);
 			} else {
